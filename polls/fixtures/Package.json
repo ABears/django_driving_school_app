@@ -1,0 +1,35 @@
+[
+    {
+      "model": "polls.Package",
+      "pk": "88a73265-1c80-407c-936f-15e817dfcf91",
+      "fields": {
+        "name": "starter",
+        "description": "Get your mininum package with the starter pack containing the obligatory 20 hours of learning",
+        "images": "2.jpg",
+        "forfait_hour": 20, 
+        "price": 899
+      }
+    },
+    {
+        "model": "polls.Package",
+        "pk": "22b78192-e9c9-4c1d-a83b-4ef98cfda0fe",
+        "fields": {
+          "name": "deepening",
+          "description": "Deepening is a special package for deepen your knowledge and past your test serenely",
+          "images": "6.jpg",
+          "forfait_hour": 5,
+          "price": 220
+        }
+    },
+    {
+        "model": "polls.Package",
+        "pk": "5528de1b-2469-4d84-bc5b-a0f9d4cfe85d",
+        "fields": {
+          "name": "unite",
+          "description": "Unite allow you to take only one hour of course. For deepen your knowledge.",
+          "images": "6.jpg",
+          "forfait_hour": 1,
+          "price": 50
+        }
+    }
+]

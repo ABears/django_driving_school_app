@@ -1,0 +1,30 @@
+[
+    {
+      "model": "polls.Roles",
+      "pk": "ad5a82ae-bedb-427c-9569-47a8be3307dc",
+      "fields": {
+        "name": "starter"
+      }
+    },
+    {
+        "model": "polls.Roles",
+        "pk": "9b1d9ea2-6ddb-465d-93ee-8a0e629deaa5",
+        "fields": {
+          "name": "deepening"
+        }
+    },
+    {
+        "model": "polls.Roles",
+        "pk":"8b09b1af-5d94-4f5e-8c7f-2952832c7104",
+        "fields": {
+          "name": "Instructor"
+        }
+    },
+    {
+        "model": "polls.Roles",
+        "pk": "ab413daf-6f9f-465e-a831-a5dea56630bc",
+        "fields": {
+          "name": "Student"
+        }
+    }
+]
