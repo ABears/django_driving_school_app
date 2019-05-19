@@ -5,15 +5,14 @@ from django.contrib.auth.models import User
 from polls.models import Appointement
 
 # Group creation
-administrator_group = Group.objects.get_or_create(name='administrator')
-secretary_group = Group.objects.get_or_create(name='secretary')
-instructor_group = Group.objects.get_or_create(name='instructor')
-student_group = Group.objects.get_or_create(name='student')
+administrator_group, created = Group.objects.get_or_create(name='administrator')
+secretary_group, created = Group.objects.get_or_create(name='secretary')
+instructor_group, created = Group.objects.get_or_create(name='instructor')
+student_group, created = Group.objects.get_or_create(name='student')
 
 # Create content type
 user_type = ContentType.objects.get_for_model(User)
-appointement_type = ContentType.objects.get_for_model(User)
-
+appointement_type = ContentType.objects.get_for_model(Appointement)
 
 # Create secretary permissions
 create_secretary_account = Permission.objects.create(codename='create_secretary_account',
@@ -166,7 +165,6 @@ instructor_group.permissions.add(delete_appointement)
 
 # Add reading own student profil permission to instructor
 instructor_group.permissions.add(read_own_student_profil)
-
 
 # Add appointement create and read own to student
 student_group.permissions.add(create_appointement)
