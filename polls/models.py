@@ -1,19 +1,6 @@
 from django.db import models
 import uuid
 
-
-class Roles(models.Model):
-    id = models.CharField(max_length=100, blank=False, primary_key=True, unique=True, default=uuid.uuid4)
-    name = models.CharField(max_length=200, unique=True, blank=False)
-
-class Users(models.Model):
-    id = models.CharField(max_length=100, blank=False, primary_key=True, unique=True, default=uuid.uuid4)
-    lastname = models.CharField(max_length=200, blank=False)
-    firstname = models.CharField(max_length=200, blank=False)
-    email = models.CharField(max_length=200, blank=False)
-    password = models.CharField(max_length=200, blank=False)
-    role = models.ForeignKey(Roles, blank=False, on_delete=models.PROTECT)
-
 class Package(models.Model):
     id = models.CharField(max_length=100, blank=False, primary_key=True, unique=True, default=uuid.uuid4)
     name = models.CharField(max_length=200, blank=False)
