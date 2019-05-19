@@ -124,5 +124,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Set roles file
-ROLEPERMISSIONS_MODULE = 'polls.roles'
+# Custom auth profile module
+AUTH_USER_MODEL = 'polls.UserModel'

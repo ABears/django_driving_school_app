@@ -1,0 +1,30 @@
+[
+    {
+      "model": "polls.UserModel",
+      "pk": 1,
+      "fields": {
+        "id": "e4c0a598-348e-4d23-bb59-5ff27e8df019",
+        "username": "jean",
+        "password": "pbkdf2_sha256$150000$kdo4OZwWuEz4$6UGJyInP4DxmpIuUv+Hj53MBDBVB0WXTXDf/YnNttm8=",
+        "email": "Doe@gmail.com",
+        "first_name": "Jean",
+        "last_name": "DOe",
+        "forfait_hour": 0,
+        "images": "default.jpg"
+      }
+    },
+    {
+        "model": "polls.UserModel",
+        "pk": 2,
+        "fields": {
+          "id": "6706128d-d517-4861-8bbd-5bb225fc486a",
+          "username": "jeanne",
+          "password": "pbkdf2_sha256$150000$kdo4OZwWuEz4$6UGJyInP4DxmpIuUv+Hj53MBDBVB0WXTXDf/YnNttm8=",
+          "email": "Jeanne-Doe@gmail.com",
+          "first_name": "Jeanne",
+          "last_name": "DOe",
+          "forfait_hour": 0,
+          "images": "default.jpg"
+        }
+    }
+]
