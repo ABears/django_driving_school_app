@@ -14,11 +14,12 @@ class Administrator(AbstractUserRole):
         'read_instructor_account': True,
         'edit_instructor_account': True,
         'delete_instructor_account': True,
+        'read_student_profil': True,
+        'create_course_hour': True,
         'create_all_appointement': True,
         'read_all_appointement': True,
         'edit_all_appointement': True,
         'delete_all_appointement': True,
-        'create_course_hour': True,
         'read_driving_school_planning': True
     }
 
@@ -32,11 +33,12 @@ class Secretary(AbstractUserRole):
         'read_instructor_account': True,
         'edit_instructor_account': True,
         'delete_instructor_account': True,
+        'read_student_profil': True,
+        'create_course_hour': True,
         'create_all_appointement': True,
         'read_all_appointement': True,
         'edit_all_appointement': True,
         'delete_all_appointement': True,
-        'create_course_hour': True,
         'read_driving_school_planning': True
 
     }
@@ -52,6 +54,6 @@ class Instructor(AbstractUserRole):
 
 class Student(AbstractUserRole):
     available_permissions = {
-        'read_own_appointement': True,
+        'read_appointement': True,
         'create_appointement': True
     }
