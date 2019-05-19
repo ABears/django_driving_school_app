@@ -726,7 +726,7 @@ nav.navbar.navbar-default {
     padding: 2em;
     background:rgba(51, 158, 174, 0.62);
 }
-.w3layouts_register_right input[type="text"],.w3layouts_register_right input[type="email"]{
+.w3layouts_register_right input,.w3layouts_register_right input{
 	outline: none;
     background: #fff;
     padding: 12px;
@@ -734,6 +734,7 @@ nav.navbar.navbar-default {
     font-size: 14px;
     color: #212121;
     width: 100%;
+    margin:1.5em 0;
 }
 .w3layouts_register_right input[type="email"]{
 	margin:1.5em 0;
