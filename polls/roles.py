@@ -40,7 +40,6 @@ class Secretary(AbstractUserRole):
         'edit_all_appointement': True,
         'delete_all_appointement': True,
         'read_driving_school_planning': True
-
     }
     
 class Instructor(AbstractUserRole):

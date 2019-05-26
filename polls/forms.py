@@ -26,3 +26,17 @@ class LoginForm(ModelForm):
     class Meta:
         model = UserModel
         fields = ['email', 'password']
+    
+    def clean(self):
+        
+        cleaned_data = self.cleaned_data
+        get_email = cleaned_data['email']
+        get_password = cleaned_data['password']
+
+        try:
+            user = UserModel.objects.get(email=get_email)
+            user.check_password(get_password)
+        except UserModel.DoesNotExist:
+            raise ValidationError("It's look like your account it's not recognized")  
+        
+        return cleaned_data

@@ -5,6 +5,18 @@
 <body>
 <!-- contact -->		
 <div class="contact"> 
+		{% if form.errors %}
+			<div class="alert alert-danger text-center">
+				{% for error in form.non_field_errors  %}
+				<h4> {{ error }} </h4>
+				{% endfor %}
+				{% for field in form %}
+					{% if field.errors %}
+						<h4>{{field.name}}</h4> {{ field.errors }}
+					{% endif %}            
+				{% endfor %}
+			</div>
+    	{% endif %}
 		<div class="container">
 			<div class="w3l-heading">
 				<h2 class="w3ls_head">Welcome back !</h2>

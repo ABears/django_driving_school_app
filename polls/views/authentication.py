@@ -45,8 +45,7 @@ def index(request):
     return render(request, 'home.html', context)
 
 def connection(request):
-    all_packages = Package.objects.all()        
-    context = {'all_packages': all_packages}
+    login_form = None
 
     if request.POST:
         login_form = LoginForm(request.POST) 
@@ -58,7 +57,8 @@ def connection(request):
 
             if user and is_check_password:
                 login(request, user)
-                print(user.is_authenticated)
                 return redirect('/')
+
+    context = {'form': login_form}
 
     return render(request, 'connection.html', context)
