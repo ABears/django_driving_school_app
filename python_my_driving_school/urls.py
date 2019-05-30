@@ -14,9 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from polls.views import authentication
+from polls.views import administration
 from django.urls import path
 
 urlpatterns = [
     path('', authentication.index, name="index"),
-    path('connection', authentication.connection, name="connection"),
+    path('login', authentication.connection, name="login"),
+    path('logout', authentication.disconnection, name="logout"),
+    path('admin-panel', administration.admin_panel, name="admin-panel"),
+    path('create-user', administration.create_user, name="create-user"),
 ]

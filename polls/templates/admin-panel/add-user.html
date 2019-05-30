@@ -1,0 +1,41 @@
+{% extends "../index.html" %}
+{% load staticfiles %}
+{% static "" as  BaseUrl %}
+{% block content %}
+<body>
+    {% if form.errors %}
+        <div class="alert alert-danger text-center">
+            {% for error in form.non_field_errors  %}
+            <h4> {{ error }} </h4>
+            {% endfor %}
+            {% for field in form %}
+                {% if field.errors %}
+                    <h4>{{field.name}}</h4> {{ field.errors }}
+                {% endif %}            
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- register -->
+    <div class="register">
+            <div class="container">
+                <div class="col-md-6 w3layouts_register_right">
+                    <form action="#" method="post" id="form-register">	
+                        {% csrf_token %}
+                        <input name="first_name"  placeholder="First Name" type="text" style="margin-bottom: 1rem" required="">
+                        <input name="last_name"  placeholder="Last Name" type="text" required="">
+                        <input name="email"  placeholder="Email" type="email" required="">
+                        <input name="password"  placeholder="Password" type="password" required="">
+                        <input type="submit" value="Register">
+                    </form>
+                </div>
+                <div class="col-md-6 w3layouts_register_left">
+                    <h3><span>Add </span> {{ subject }}</h3>
+                    <p>{{ description }}</p>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    <!-- //register -->
+    
+        
+{% endblock %}

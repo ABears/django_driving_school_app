@@ -36,6 +36,7 @@ FIXTURE_DIRS = (
 
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
+    'polls.templatetags.auth_extras',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,0 +1,191 @@
+{% extends "../index.html" %}
+{% load staticfiles %}
+{% static "" as  BaseUrl %}
+{% block content %}
+
+<body>
+    {% if form.errors %}
+    <div class="alert alert-danger text-center">
+        {% for error in form.non_field_errors  %}
+        <h4> {{ error }} </h4>
+        {% endfor %}
+        {% for field in form %}
+        {% if field.errors %}
+        <h4>{{field.name}}</h4> {{ field.errors }}
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- Instructor -->
+    <div class="team">
+        <div class="container">
+            <div class="team-main">
+                <div class="w3l-heading">
+                    <h3 class="w3ls_head">All instructor's</h3>
+                </div>
+                <div class="team-bottom">
+                    <div class="col-md-3 team-grids mb-5 mt-5">
+                        <div class="add-container">
+                            <a href="/create-instructor">
+                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning"><i
+                                        class="fa fa-plus"></i></button>
+                            </a>
+                        </div>
+                        <div class="team-bottom-info">
+                            <p>Ajouter un instructeur</p>
+                        </div>
+                        <!-- end normal -->
+                    </div>
+                    {% for instructor in instructors %}
+                    <div class="col-md-3 team-grids">
+                        <!-- normal -->
+                        <div class="ih-item circle effect5">
+                            <div class="img"><img src="images/t1.jpg" alt="img" class="img-responsive"></div>
+                            <div class="info">
+                                <div class="info-back">
+                                    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-bottom-info">
+                            <p>{{user.email}}</p>
+                            <div class="w3l-social">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- end normal -->
+                    </div>
+                    {% endfor %}
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Instructor -->
+
+    <!-- User -->
+    <div class="team">
+        <div class="container">
+            <div class="team-main m">
+                <div class="w3l-heading">
+                    <h3 class="w3ls_head">All student's</h3>
+                </div>
+                <div class="team-bottom">
+                    <div class="col-md-3 team-grids mb-5 mt-5">
+                        <div class="add-container">
+                            <a href="/create-user">
+                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning"><i
+                                        class="fa fa-plus"></i></button>
+                            </a>
+                        </div>
+                        <div class="team-bottom-info">
+                            <p>Ajouter un(e) étuditant(e)</p>
+                        </div>
+                        <!-- end normal -->
+                    </div>
+                    {% for student in students %}
+                    <div class="col-md-3 team-grids mb-5 mt-5">
+                        <!-- normal -->
+                        <div class="ih-item circle effect5">
+                            <div class="img"><img
+                                    src="http://fanfare-makabes.fr/wp-content/uploads/2015/09/user-image.jpg" alt="img"
+                                    class="img-responsive"></div>
+                            <div class="info">
+                                <div class="info-back">
+                                    <h3>{{ student.first_name }} {{ student.last_name }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-bottom-info">
+                            <p>{{student.email}}</p>
+                            <div class="w3l-social">
+                                <ul>
+                                    <li><a href="#">
+                                            <button class="img text-light h6 btn btn-circle btn-xl btn-danger"><i
+                                                    class="fa fa-close"></i></button>
+                                        </a></li>
+                                    <li><a href="#">
+                                            <button class="img text-light h6 btn btn-circle btn-xl btn-primary"><i
+                                                    class="fa fa-pencil"></i></button>
+                                        </a></li>
+                                    <li><a href="#">
+                                            <button class="img text-light h6 btn btn-circle btn-xl btn-dark"><i
+                                                    class="fa fa-eye"></i></button>
+                                        </a></li>
+                                    <li><a href="#">
+                                            <button class="img text-light h6 btn btn-circle btn-xl btn-success"><i
+                                                    class="fa fa-arrow-up"></i></button>
+                                        </a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- end normal -->
+                    </div>
+                    {% endfor %}
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- User -->
+
+    <!-- Secretary -->
+    <div class="team">
+        <div class="container">
+            <div class="team-main">
+                <div class="w3l-heading">
+                    <h3 class="w3ls_head">Secretery team</h3>
+                </div>
+                <div class="team-bottom">
+                    <div class="col-md-3 team-grids mb-5 mt-5">
+                        <div class="add-container">
+                            <a href="/create-secretary">
+                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning"><i
+                                        class="fa fa-plus"></i></button>
+                            </a>
+                        </div>
+                        <div class="team-bottom-info">
+                            <p>Ajouter un(e) secretaire</p>
+                        </div>
+                        <!-- end normal -->
+                    </div>
+                    {% for secretary in secretarys %}
+                    <div class="col-md-3 team-grids">
+                        <!-- normal -->
+                        <div class="ih-item circle effect5">
+                            <div class="img"><img src="images/t1.jpg" alt="img" class="img-responsive"></div>
+                            <div class="info">
+                                <div class="info-back">
+                                    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-bottom-info">
+                            <p class="">{{user.email}}</p>
+                            <div class="w3l-social">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- end normal -->
+                    </div>
+                    {% endfor %}
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Secretary -->
+
+
+    {% endblock %}
