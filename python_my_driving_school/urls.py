@@ -23,4 +23,6 @@ urlpatterns = [
     path('logout', authentication.disconnection, name="logout"),
     path('admin-panel', administration.admin_panel, name="admin-panel"),
     path('create-user', administration.create_user, name="create-user"),
+    path('create-instructor', administration.create_instructor, name="create-instructor"),
+    path('create-secretary', administration.create_secretary, name="create-secretary")
 ]

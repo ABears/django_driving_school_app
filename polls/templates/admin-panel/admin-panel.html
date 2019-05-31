@@ -4,6 +4,7 @@
 {% block content %}
 
 <body>
+
     <!-- Instructor -->
     <div class="team">
         <div class="container">
@@ -15,8 +16,9 @@
                     <div class="col-md-3 team-grids mb-5 mt-5">
                         <div class="add-container">
                             <a href="/create-instructor">
-                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning"><i
-                                        class="fa fa-plus"></i></button>
+                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning">
+                                    <i class="fa fa-plus"></i>
+                                </button>
                             </a>
                         </div>
                         <div class="team-bottom-info">
@@ -27,25 +29,38 @@
                     {% for instructor in instructors %}
                     <div class="col-md-3 team-grids">
                         <!-- normal -->
+                        <!-- normal -->
                         <div class="ih-item circle effect5">
-                            <div class="img"><img src="images/t1.jpg" alt="img" class="img-responsive"></div>
-                            <div class="info">
-                                <div class="info-back">
-                                    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                                <div class="img"><img src="http://fanfare-makabes.fr/wp-content/uploads/2015/09/user-image.jpg" alt="img"
+                                        class="img-responsive"></div>
+                                <div class="info">
+                                    <div class="info-back">
+                                        <h3>{{ instructor.first_name }} {{ instructor.last_name }}</h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="team-bottom-info">
-                            <p>{{user.email}}</p>
-                            <div class="w3l-social">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                                </ul>
+                            <div class="team-bottom-info">
+                                <p>{{instructor.email}}</p>
+                                <div class="w3l-social">
+                                    <ul>
+                                        <li><a href="#">
+                                                <button class="img text-light h6 btn btn-circle btn-xl btn-danger"><i
+                                                        class="fa fa-close"></i></button>
+                                            </a></li>
+                                        <li><a href="#">
+                                                <button class="img text-light h6 btn btn-circle btn-xl btn-primary"><i
+                                                        class="fa fa-pencil"></i></button>
+                                            </a></li>
+                                        <li><a href="#">
+                                                <button class="img text-light h6 btn btn-circle btn-xl btn-dark"><i class="fa fa-eye"></i></button>
+                                            </a></li>
+                                        <li><a href="#">
+                                                <button class="img text-light h6 btn btn-circle btn-xl btn-success"><i
+                                                        class="fa fa-arrow-up"></i></button>
+                                            </a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-
                         <!-- end normal -->
                     </div>
                     {% endfor %}
@@ -67,8 +82,9 @@
                     <div class="col-md-3 team-grids mb-5 mt-5">
                         <div class="add-container">
                             <a href="/create-user">
-                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning"><i
-                                        class="fa fa-plus"></i></button>
+                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning">
+                                    <i class="fa fa-plus"></i>
+                                </button>
                             </a>
                         </div>
                         <div class="team-bottom-info">
@@ -134,8 +150,9 @@
                     <div class="col-md-3 team-grids mb-5 mt-5">
                         <div class="add-container">
                             <a href="/create-secretary">
-                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning"><i
-                                        class="fa fa-plus"></i></button>
+                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning">
+                                    <i class="fa fa-plus"></i>
+                                </button>
                             </a>
                         </div>
                         <div class="team-bottom-info">
@@ -147,20 +164,33 @@
                     <div class="col-md-3 team-grids">
                         <!-- normal -->
                         <div class="ih-item circle effect5">
-                            <div class="img"><img src="images/t1.jpg" alt="img" class="img-responsive"></div>
+                            <div class="img"><img src="http://fanfare-makabes.fr/wp-content/uploads/2015/09/user-image.jpg" alt="img"
+                                    class="img-responsive"></div>
                             <div class="info">
                                 <div class="info-back">
-                                    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                                    <h3>{{ secretary.first_name }} {{ secretary.last_name }}</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="team-bottom-info">
-                            <p class="">{{user.email}}</p>
+                            <p>{{secretary.email}}</p>
                             <div class="w3l-social">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#">
+                                            <button class="img text-light h6 btn btn-circle btn-xl btn-danger"><i
+                                                    class="fa fa-close"></i></button>
+                                        </a></li>
+                                    <li><a href="#">
+                                            <button class="img text-light h6 btn btn-circle btn-xl btn-primary"><i
+                                                    class="fa fa-pencil"></i></button>
+                                        </a></li>
+                                    <li><a href="#">
+                                            <button class="img text-light h6 btn btn-circle btn-xl btn-dark"><i class="fa fa-eye"></i></button>
+                                        </a></li>
+                                    <li><a href="#">
+                                            <button class="img text-light h6 btn btn-circle btn-xl btn-success"><i
+                                                    class="fa fa-arrow-up"></i></button>
+                                        </a></li>
                                 </ul>
                             </div>
                         </div>

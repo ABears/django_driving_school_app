@@ -60,7 +60,6 @@ def create_user(request):
                     
                 user.groups.add(student_group)
                 return redirect('/admin-panel')
-            print(register_form.errors)
 
     else:
         redirect('/')
@@ -120,27 +119,37 @@ def create_instructor(request):
     is_administrator  = request.user.groups.filter(name='administrator').exists()
 
     if is_administrator or is_secratery:
-        print('')        
+        register_form = None
+
+        if request.POST:
+            register_form = RegisterForm(request.POST)
+            # Registration form
+            if register_form.is_valid():
+                data = request.POST.copy()
+                user = UserModel.objects.create_user(
+                                        username = uuid.uuid4(),
+                                        password = data.get('password'),
+                                        email = data.get('email'),
+                                        first_name = data.get('first_name'),
+                                        last_name = data.get('last_name'),
+                                        forfait_hour = 0,
+                                        images= "default.jpg"
+                                    )
+                student_group = Group.objects.get(name='instructor')
+                    
+                user.groups.add(student_group)
+                return redirect('/admin-panel')
+
     else:
         redirect('/')
 
-    return render(request, 'admin-panel/add-user.html', {'subject': 'instructor', 'description': ''})
-
-def read_instructor(request):
-    return render(request, 'admin-panel/single-user.html')    
-
-def update_instructor(request):
-
-    is_secratery = request.user.groups.filter(name='secretary').exists()
-    is_administrator  = request.user.groups.filter(name='administrator').exists()
-
-    if is_administrator or is_secratery:
-        print('')        
-    else:
-        redirect('/')
-
-
-    return render(request, 'admin-panel/update-user.html', context)
+    context = {
+        'form': register_form,
+        'subject': 'instructor',
+        'description': ''
+    }
+    
+    return render(request, 'admin-panel/add-user.html', context)
 
 def delete_instructor(request):
 
@@ -160,12 +169,38 @@ def create_secretary(request):
 
     is_administrator  = request.user.groups.filter(name='administrator').exists()
 
-    if is_administrator or is_secratery:
-        print('')        
+    if is_administrator:
+        register_form = None
+
+        if request.POST:
+            register_form = RegisterForm(request.POST)
+            # Registration form
+            if register_form.is_valid():
+                data = request.POST.copy()
+                user = UserModel.objects.create_user(
+                                        username = uuid.uuid4(),
+                                        password = data.get('password'),
+                                        email = data.get('email'),
+                                        first_name = data.get('first_name'),
+                                        last_name = data.get('last_name'),
+                                        forfait_hour = 0,
+                                        images= "default.jpg"
+                                    )
+                student_group = Group.objects.get(name='secretary')
+                    
+                user.groups.add(student_group)
+                return redirect('/admin-panel')
+
     else:
         redirect('/')
 
-    return render(request, 'admin-panel/add-user.html', {'subject': 'secretary', 'description': ''})
+    context = {
+        'form': register_form,
+        'subject': 'secretary',
+        'description': ''
+    }
+    
+    return render(request, 'admin-panel/add-user.html', context)
 
 def read_secretary(request):
 
