@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from polls.models import UserModel
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 
 # Create the form class.
 class RegisterForm(ModelForm):
@@ -30,13 +31,18 @@ class LoginForm(ModelForm):
     def clean(self):
         
         cleaned_data = self.cleaned_data
-        get_email = cleaned_data['email']
+
+        try:
+            get_email = cleaned_data['email']
+        except KeyError as e:
+            raise ValidationError("Error")
+
         get_password = cleaned_data['password']
 
         try:
             user = UserModel.objects.get(email=get_email)
             user.check_password(get_password)
         except UserModel.DoesNotExist:
-            raise ValidationError("It's look like your account it's not recognized")  
-        
+            raise ValidationError("It's look like your account it's not recognized")
+
         return cleaned_data

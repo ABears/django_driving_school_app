@@ -10,7 +10,7 @@ class UserModel(AbstractUser):
     username = models.CharField(max_length=500, default=None, unique=True)
     first_name = models.CharField(max_length=500, default=None)
     last_name = models.CharField(max_length=500, default=None)
-    email = models.CharField(max_length=500, default=None)
+    email = models.EmailField(max_length=500, default=None)
     password = models.CharField(max_length=500, default=None)
     is_active = models.BooleanField(default=True)
     forfait_hour = models.IntegerField(default=None)

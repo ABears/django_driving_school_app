@@ -57,18 +57,21 @@ def create_user(request):
                                         images= "default.jpg"
                                     )
                 student_group = Group.objects.get(name='student')
-
+                    
                 user.groups.add(student_group)
                 return redirect('/admin-panel')
+            print(register_form.errors)
 
     else:
         redirect('/')
 
     context = {
-        'form': register_form
+        'form': register_form,
+        'subject': 'user',
+        'description': 'Add user to hour driving school and let him get all the famous advantage and lessons of our Driving School.'
     }
     
-    return render(request, 'admin-panel/add-user.html', {'subject': 'user', 'description': 'Add user to hour driving school and let him get all the famous advantage and lessons of our Driving School.'})
+    return render(request, 'admin-panel/add-user.html', context)
     
 
 def read_user(request):
