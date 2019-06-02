@@ -15,6 +15,7 @@ Including another URLconf
 """
 from polls.views import authentication
 from polls.views import administration
+from polls.views import appointement
 from django.urls import path
 
 urlpatterns = [
@@ -34,4 +35,8 @@ urlpatterns = [
     path('delete-student/<id>', administration.delete_student, name="delete-student"),
     path('delete-instructor/<id>', administration.delete_instructor, name="delete-instructor"),
     path('delete-secretary/<id>', administration.delete_secretary, name="delete-secretary"),
+    path('create-appointement/<id>/<student_id>/<instructor_id>', appointement.create_appointement, name="create-appointement"),
+    path('read-appointement', appointement.read_appointement, name="read-appointement"),
+    path('update-appointement', appointement.update_appointement, name="update-appointement"),
+    path('delete-appointement', appointement.delete_appointement, name="delete-appointement"),
 ]

@@ -15,7 +15,7 @@ class UserModel(AbstractUser):
     is_active = models.BooleanField(default=True)
     forfait_hour = models.IntegerField(default=None)
     images = models.CharField(max_length=500, default=None)
-
+    get_students = models.ManyToManyField("self", blank=True)
 
 class Package(models.Model):
     id = models.CharField(max_length=100, blank=False, primary_key=True, unique=True, default=uuid.uuid4)
@@ -34,8 +34,3 @@ class Appointement(models.Model):
     appointement_date = models.DateTimeField()
     instructor = models.ForeignKey(UserModel, related_name='instructor',  blank=True, null=True, on_delete=models.CASCADE)
     student = models.ForeignKey(UserModel, related_name='student',  blank=True, null=True, on_delete=models.CASCADE)
-
-class Instructor_class(models.Model):
-    id = models.CharField(max_length=100, blank=False, primary_key=True, unique=True, default=uuid.uuid4)
-    instructor_id = models.ForeignKey(UserModel, blank=False, on_delete=models.CASCADE, related_name='get_instructor')
-    student_id = models.ForeignKey(UserModel, blank=False, on_delete=models.CASCADE, related_name='get_student')

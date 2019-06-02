@@ -200,11 +200,11 @@ def read_instructor(request, id):
     is_secratery = request.user.groups.filter(name='secretary').exists()
     is_administrator  = request.user.groups.filter(name='administrator').exists()
     get_instructors = UserModel.objects.filter(groups__name="instructor", is_active=True)
-    get_students = UserModel.objects.filter(groups__name="student", is_active=True)
 
     if is_administrator or is_secratery:
         try:    
             get_user = UserModel.objects.get(id=id)
+            get_students = get_user.get_students.all()
         except:
             messages.success(request, 'User not found')      
     else:

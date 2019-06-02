@@ -8,7 +8,9 @@
 
     <!-- Instructor -->
     <div class="team">
-
+        <div class='get-csrf'>
+            {% csrf_token %}
+        </div>
         <div class="container">
                 {% if messages %}
                 <div class="alert alert-success text-center">
@@ -52,382 +54,497 @@
                             </div>
                         <!-- end normal -->
                     </div>
-                    <div class="col-md-12 team-grids mt-5">
-                        <div class="hello-week border-shadow p-5">
-                            <div class="hello-week__header">
-                                <div class="hello-week__label"></div>
-                            </div>
-                            <div class="hello-week__week"></div>
-                            <div class="hello-week__month"></div>
-                        </div>   
-                    </div>
-                    <div class="col-md-12 team-grids mt-5">
-                    
-                        <h2><strong>Appointement</strong></h2>
-                        <ul class="demo-last md-3 mt-3"></ul>
 
-                        <!-- 8 Heure -->
-                        <div class="row mt-3">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
-                                <span class="get-hour">8</span> H
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
+                    <!-- BEGIN CALENDAR -->
+                    {% if subject_user|has_group:'instructor' or subject_user|has_group:'student' %}
+                        <div class="col-md-12 team-grids mt-5">
+                            <div class="hello-week border-shadow p-5">
+                                <div class="hello-week__header">
+                                    <div class="hello-week__label"></div>
                                 </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
+                                <div class="hello-week__week"></div>
+                                <div class="hello-week__month"></div>
+                            </div>   
                         </div>
-
-                        <!--  9 Heure -->
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
-                                <span class="get-hour">9</span>H
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--  10 Heure -->
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
-                                <span class="get-hour">10</span>H
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--  11 Heure -->                        
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
-                                <span class="get-hour">11</span>H
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--  12 Heure -->                      
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
-                                <span class="get-hour">12</span>H
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--  13 Heure -->                    
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
-                                <span class="get-hour">13</span>H
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--  14 Heure -->                                           
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
-                                <span class="get-hour">14</span>H                                
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--  15 Heure -->                                                                   
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
-                                <span class="get-hour">15</span>H                                                             
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--  16 Heure -->                                                                                           
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
-                                <span class="get-hour">16</span>H                                                                                           
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--  17 Heure -->                                                                                           
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
-                                <span class="get-hour">17</span>H                                                                                                                        
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-md-12 team-grids mt-5">
                         
-                        <!--  18 Heure -->                                                                                           
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
-                                <span class="get-hour">18</span>H                                                                                                                                                        
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
+                            <h2><strong>Appointement</strong></h2>
+                            <ul class="demo-last md-3 mt-3"></ul>
 
-                        <!--  19 Heure -->                                                                                           
-                        <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right border-bottom">
-                                <span class="get-hour">19</span>H                       
-                            </div>
-                            <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4 border-bottom">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <select class="form-control" id="sel1">
-                                        <option>Instructor</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for instructor in instructors %}
-                                                <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    <select class="form-control" id="sel1">
-                                        <option>Student</option>
-                                        {% if user|has_group:'administrator' %}
-                                            {% for student in students %}
-                                                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
+                            <!-- 8 Heure -->
+                            <div class="row mt-3">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <span class="get-hour">8</span> H
                                 </div>
-                                <div class="col-md-3 col-sm-3 col-lg-3">
-                                    <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
 
-                    </div>
-                    <div class="clearfix"> </div>
+                                        <select class="form-control instructor-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                <!-- if subject user is admin set only option subject user -->
+                                                {% if subject_user|has_group:'instructor' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}                                                                   
+                                                    <option>Instructor</option>
+                                                    {% for instructor in instructors %}
+                                                        <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control student-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                {% if subject_user|has_group:'student' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}
+                                                    <option>Student</option>
+                                                    {% for student in students %}
+                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  9 Heure -->
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <span class="get-hour">9</span>H
+                                </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                        <select class="form-control instructor-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                <!-- if subject user is admin set only option subject user -->
+                                                {% if subject_user|has_group:'instructor' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}                                                                   
+                                                    <option>Instructor</option>
+                                                    {% for instructor in instructors %}
+                                                        <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control student-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                {% if subject_user|has_group:'student' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}
+                                                    <option>Student</option>
+                                                    {% for student in students %}
+                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  10 Heure -->
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <span class="get-hour">10</span>H
+                                </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                        <select class="form-control instructor-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                <!-- if subject user is admin set only option subject user -->
+                                                {% if subject_user|has_group:'instructor' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}                                                                   
+                                                    <option>Instructor</option>
+                                                    {% for instructor in instructors %}
+                                                        <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control student-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                {% if subject_user|has_group:'student' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}
+                                                    <option>Student</option>
+                                                    {% for student in students %}
+                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  11 Heure -->                        
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <span class="get-hour">11</span>H
+                                </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                        <select class="form-control instructor-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                <!-- if subject user is admin set only option subject user -->
+                                                {% if subject_user|has_group:'instructor' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}                                                                   
+                                                    <option>Instructor</option>
+                                                    {% for instructor in instructors %}
+                                                        <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control student-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                {% if subject_user|has_group:'student' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}
+                                                    <option>Student</option>
+                                                    {% for student in students %}
+                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  12 Heure -->                      
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <span class="get-hour">12</span>H
+                                </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                        <select class="form-control instructor-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                <!-- if subject user is admin set only option subject user -->
+                                                {% if subject_user|has_group:'instructor' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}                                                                   
+                                                    <option>Instructor</option>
+                                                    {% for instructor in instructors %}
+                                                        <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control student-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                {% if subject_user|has_group:'student' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}
+                                                    <option>Student</option>
+                                                    {% for student in students %}
+                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  13 Heure -->                    
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <span class="get-hour">13</span>H
+                                </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                        <select class="form-control instructor-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                <!-- if subject user is admin set only option subject user -->
+                                                {% if subject_user|has_group:'instructor' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}                                                                   
+                                                    <option>Instructor</option>
+                                                    {% for instructor in instructors %}
+                                                        <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control student-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                {% if subject_user|has_group:'student' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}
+                                                    <option>Student</option>
+                                                    {% for student in students %}
+                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  14 Heure -->                                           
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <span class="get-hour">14</span>H                                
+                                </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                        <select class="form-control instructor-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                <!-- if subject user is admin set only option subject user -->
+                                                {% if subject_user|has_group:'instructor' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}                                                                   
+                                                    <option>Instructor</option>
+                                                    {% for instructor in instructors %}
+                                                        <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control student-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                {% if subject_user|has_group:'student' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}
+                                                    <option>Student</option>
+                                                    {% for student in students %}
+                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  15 Heure -->                                                                   
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <span class="get-hour">15</span>H                                                             
+                                </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                        <select class="form-control instructor-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                <!-- if subject user is admin set only option subject user -->
+                                                {% if subject_user|has_group:'instructor' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}                                                                   
+                                                    <option>Instructor</option>
+                                                    {% for instructor in instructors %}
+                                                        <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control student-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                {% if subject_user|has_group:'student' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}
+                                                    <option>Student</option>
+                                                    {% for student in students %}
+                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  16 Heure -->                                                                                           
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <span class="get-hour">16</span>H                                                                                           
+                                </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                        <select class="form-control instructor-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                <!-- if subject user is admin set only option subject user -->
+                                                {% if subject_user|has_group:'instructor' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}                                                                   
+                                                    <option>Instructor</option>
+                                                    {% for instructor in instructors %}
+                                                        <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control student-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                {% if subject_user|has_group:'student' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}
+                                                    <option>Student</option>
+                                                    {% for student in students %}
+                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  17 Heure -->                                                                                           
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <span class="get-hour">17</span>H                                                                                                                        
+                                </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                        <select class="form-control instructor-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                <!-- if subject user is admin set only option subject user -->
+                                                {% if subject_user|has_group:'instructor' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}                                                                   
+                                                    <option>Instructor</option>
+                                                    {% for instructor in instructors %}
+                                                        <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control student-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                {% if subject_user|has_group:'student' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}
+                                                    <option>Student</option>
+                                                    {% for student in students %}
+                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!--  18 Heure -->                                                                                           
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <span class="get-hour">18</span>H                                                                                                                                                        
+                                </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                        <select class="form-control instructor-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                <!-- if subject user is admin set only option subject user -->
+                                                {% if subject_user|has_group:'instructor' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}                                                                   
+                                                    <option>Instructor</option>
+                                                    {% for instructor in instructors %}
+                                                        <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control student-selector" id="sel1">
+                                            {% if user|has_group:'administrator' %}
+                                                {% if subject_user|has_group:'student' %}
+                                                    <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
+                                                {% else %}
+                                                    <option>Student</option>
+                                                    {% for student in students %}
+                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  19 Heure -->                                                                                           
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right border-bottom">
+                                    <span class="get-hour">19</span>H                       
+                                </div>
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4 border-bottom">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+                                        <select class="form-control" id="sel1">
+                                            <option>Instructor</option>
+                                            {% if user|has_group:'administrator' %}
+                                                {% for instructor in instructors %}
+                                                    <option value="{{instructor.id}}">{{instructor.first_name}} {{instructor.last_name}}</option>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                        <select class="form-control" id="sel1">
+                                            <option>Student</option>
+                                            {% if user|has_group:'administrator' %}
+                                                {% for student in students %}
+                                                    <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3">
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="clearfix"> </div>
+                    {% endif %}
+                    <!-- END CALENDAR -->
                 </div>
             </div>
         </div>

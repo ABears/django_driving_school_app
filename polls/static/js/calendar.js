@@ -77,8 +77,23 @@ const calendar = new HelloWeek({
     let getRow  = this.parentNode.parentNode.previousElementSibling;
     let getHour = getRow.childNodes[1].innerHTML;
 
-    console.log(getRow);
-    console.log(getHour);
+    let appointement = last.firstChild.innerHTML + ' ' + getHour + ':00:00';
+    let userId = document.querySelector('.user-token').getAttribute("data-user");
+    let studentId = document.querySelector('.student-selector').value;
+    let instructorId = document.querySelector('.instructor-selector').value;
+    let createAppointementUrl = '/create-appointement/'  + userId + '/' + studentId + '/' + instructorId;
+    let token  = document.querySelector('.get-csrf').childNodes[1].value;
+    let data = { appointement, csrfmiddlewaretoken: token };
 
-    console.log(last.firstChild.innerHTML + ' ' + getHour + ':00:00');
+    console.log(token);
+
+    $.ajax({
+      type: "POST",
+      url: createAppointementUrl,
+      data: data,
+      success: function(response) {
+        console.log(response);
+      }
+    })
+
   });
