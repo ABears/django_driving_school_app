@@ -23,6 +23,25 @@ class RegisterForm(ModelForm):
         return cleaned_data
 
 # Create the form class.
+class UpdateForm(ModelForm):
+    class Meta:
+        model = UserModel
+        fields = ['email' , 'first_name', 'last_name']
+    
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        email = cleaned_data['email']
+
+        try:
+            if email and UserModel.objects.get(email=email):
+                raise ValidationError("Look like user all ready use this email")
+        except UserModel.DoesNotExist:
+            print('')
+
+        # Always return the full collection of cleaned data.
+        return cleaned_data
+
+# Create the form class.
 class LoginForm(ModelForm):
     class Meta:
         model = UserModel

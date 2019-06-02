@@ -8,6 +8,15 @@
     <!-- Instructor -->
     <div class="team">
         <div class="container">
+                {% if messages %}
+                <div class="alert alert-success text-center">
+                    <ul class="messages text-center">
+                        {% for message in messages %}
+                        <span {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
             <div class="team-main">
                 <div class="w3l-heading">
                     <h3 class="w3ls_head">All instructor's</h3>
@@ -43,20 +52,16 @@
                                 <p>{{instructor.email}}</p>
                                 <div class="w3l-social">
                                     <ul>
-                                        <li><a href="#">
+                                        <li><a href="/delete-instructor/{{instructor.id}}">
                                                 <button class="img text-light h6 btn btn-circle btn-xl btn-danger"><i
                                                         class="fa fa-close"></i></button>
                                             </a></li>
-                                        <li><a href="#">
+                                        <li><a href="/update-instructor/{{instructor.id}}">
                                                 <button class="img text-light h6 btn btn-circle btn-xl btn-primary"><i
                                                         class="fa fa-pencil"></i></button>
                                             </a></li>
-                                        <li><a href="#">
+                                        <li><a href="/read-instructor/{{instructor.id}}">
                                                 <button class="img text-light h6 btn btn-circle btn-xl btn-dark"><i class="fa fa-eye"></i></button>
-                                            </a></li>
-                                        <li><a href="#">
-                                                <button class="img text-light h6 btn btn-circle btn-xl btn-success"><i
-                                                        class="fa fa-arrow-up"></i></button>
                                             </a></li>
                                     </ul>
                                 </div>
@@ -109,21 +114,17 @@
                             <p>{{student.email}}</p>
                             <div class="w3l-social">
                                 <ul>
-                                    <li><a href="#">
+                                    <li><a href="/delete-student/{{student.id}}">
                                             <button class="img text-light h6 btn btn-circle btn-xl btn-danger"><i
                                                     class="fa fa-close"></i></button>
                                         </a></li>
-                                    <li><a href="#">
+                                    <li><a href="/update-student/{{student.id}}">
                                             <button class="img text-light h6 btn btn-circle btn-xl btn-primary"><i
                                                     class="fa fa-pencil"></i></button>
                                         </a></li>
-                                    <li><a href="#">
+                                    <li><a href="/read-student/{{student.id}}">
                                             <button class="img text-light h6 btn btn-circle btn-xl btn-dark"><i
                                                     class="fa fa-eye"></i></button>
-                                        </a></li>
-                                    <li><a href="#">
-                                            <button class="img text-light h6 btn btn-circle btn-xl btn-success"><i
-                                                    class="fa fa-arrow-up"></i></button>
                                         </a></li>
                                 </ul>
                             </div>
@@ -176,20 +177,16 @@
                             <p>{{secretary.email}}</p>
                             <div class="w3l-social">
                                 <ul>
-                                    <li><a href="#">
+                                    <li><a href="/delete-secretary/{{secretary.id}}">
                                             <button class="img text-light h6 btn btn-circle btn-xl btn-danger"><i
                                                     class="fa fa-close"></i></button>
                                         </a></li>
-                                    <li><a href="#">
+                                    <li><a href="/update-secretary/{{secretary.id}}">
                                             <button class="img text-light h6 btn btn-circle btn-xl btn-primary"><i
                                                     class="fa fa-pencil"></i></button>
                                         </a></li>
-                                    <li><a href="#">
+                                    <li><a href="/read-secretary/{{secretary.id}}">
                                             <button class="img text-light h6 btn btn-circle btn-xl btn-dark"><i class="fa fa-eye"></i></button>
-                                        </a></li>
-                                    <li><a href="#">
-                                            <button class="img text-light h6 btn btn-circle btn-xl btn-success"><i
-                                                    class="fa fa-arrow-up"></i></button>
                                         </a></li>
                                 </ul>
                             </div>

@@ -32,9 +32,10 @@ class Forfait(models.Model):
 class Appointement(models.Model):
     id = models.CharField(max_length=100, blank=False, primary_key=True, unique=True, default=uuid.uuid4)
     appointement_date = models.DateTimeField()
-    user_id = models.ForeignKey(UserModel, on_delete=models.CASCADE, default=None)
+    instructor = models.ForeignKey(UserModel, related_name='instructor',  blank=True, null=True, on_delete=models.CASCADE)
+    student = models.ForeignKey(UserModel, related_name='student',  blank=True, null=True, on_delete=models.CASCADE)
 
 class Instructor_class(models.Model):
     id = models.CharField(max_length=100, blank=False, primary_key=True, unique=True, default=uuid.uuid4)
-    instructor_id = models.ForeignKey(UserModel, blank=False, on_delete=models.CASCADE, related_name='instructor_content_type')
-    student_id = models.ForeignKey(UserModel, blank=False, on_delete=models.CASCADE, related_name='student_content_type')
+    instructor_id = models.ForeignKey(UserModel, blank=False, on_delete=models.CASCADE, related_name='get_instructor')
+    student_id = models.ForeignKey(UserModel, blank=False, on_delete=models.CASCADE, related_name='get_student')
