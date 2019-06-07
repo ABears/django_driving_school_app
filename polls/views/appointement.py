@@ -11,7 +11,7 @@ from django.contrib.auth.models import Group, User
 from polls.models import UserModel, Appointement
 from polls.models import Package
 
-# USER CRUD
+# APPOINTEMENT CRUD
 def create_appointement(request, id, student_id, instructor_id):
 
     instructor = UserModel.objects.get(id=instructor_id)
@@ -30,36 +30,47 @@ def create_appointement(request, id, student_id, instructor_id):
                             student = student,
                             instructor = instructor
                         )
+        appointement_exist = Appointement.objects.filter(appointement_date=format_appointement).all()
 
-        appointement.instructor = instructor
-        appointement.student = student
-        appointement.save()
+        if len(appointement_exist) == 1:
 
+            appointement.instructor = instructor
+            appointement.student = student
+            appointement.save()
+
+            return JsonResponse({
+                'success': 'This date is now registered',
+                'appointement': appointement.appointement_date,
+            })
+        
         return JsonResponse({
-            'appointement': appointement.appointement_date,
-            'student': instructor_student.first_name
+            'error': "This appointement is all ready used"
         })
+
 
     else:
         return redirect('/')
 
     
-# USER CRUD
-def read_appointement(request, id, student_id, instructor_id):
+def read_appointement(request, user_id):
 
-    is_secratery = request.user.groups.filter(name='secretary').exists()
-    is_administrator = request.user.groups.filter(name='administrator').exists()
-    is_instructor = request.user.groups.filter(name='instructor').exists()
-    is_student = request.user.groups.filter(name='student').exists()
+    get_user = UserModel.objects.get(id=user_id)
 
-    if request.method == 'POST':
+    user_is_student = get_user.groups.filter(name='student').exists()
+    user_is_instructor = get_user.groups.filter(name='instructor').exists()
 
-        return JsonResponse({
-            'json_response': 'json_response'
-        })
-
+    if user_is_student:
+        appointement = Appointement.objects.filter(student=user_id).values()
+    elif user_is_instructor:
+        appointement = Appointement.objects.filter(instructor_id=user_id).values()
     else:
-        redirect('/')
+        return JsonResponse({
+            'error': 'Can\'t access to this calendar'
+        })
+    
+    return JsonResponse({
+        'all_appointement': list(appointement)
+    })
 
     context = {
         'form': register_form,
@@ -70,7 +81,38 @@ def read_appointement(request, id, student_id, instructor_id):
     return render(request, 'admin-panel/add-user.html', context)
 
 
-# USER CRUD
+# READ DAY PLANNING
+def read_day_planning(request, user_id, subject_date):
+
+    get_user = UserModel.objects.get(id=user_id)
+
+    user_is_student = get_user.groups.filter(name='student').exists()
+    user_is_instructor = get_user.groups.filter(name='instructor').exists()
+
+    parsing_date = datetime.datetime.strptime(subject_date, '%d-%m-%Y')
+
+    print(parsing_date.day)
+    
+    if user_is_student:
+        appointement = Appointement.objects.filter(student=user_id, appointement_date__startswith=datetime.date(int(parsing_date.year), int(parsing_date.month), int(parsing_date.day))).values()
+    elif user_is_instructor:
+        appointement = Appointement.objects.filter(instructor_id=user_id, appointement_date__startswith=datetime.date(int(parsing_date.year) ,int(parsing_date.month),int(parsing_date.day))).values()
+    else:
+        return JsonResponse({
+            'error': 'Can\'t access to this calendar'
+        })
+    
+    return JsonResponse({
+        'all_appointement': list(appointement)
+    })
+
+    context = {
+        'form': register_form,
+    }
+    
+    return render(request, 'admin-panel/add-user.html', context)
+
+
 def update_appointement(request, id, appointement_id):
 
     is_secratery = request.user.groups.filter(name='secretary').exists()
@@ -96,20 +138,29 @@ def update_appointement(request, id, appointement_id):
     return render(request, 'admin-panel/add-user.html', context)
 
 
-# USER CRUD
-def delete_appointement(request, id, appointement_id):
+def delete_appointement(request, user_id, appointement_id):
 
     is_secratery = request.user.groups.filter(name='secretary').exists()
     is_administrator = request.user.groups.filter(name='administrator').exists()
     is_instructor = request.user.groups.filter(name='instructor').exists()
     is_student = request.user.groups.filter(name='student').exists()
 
+    get_user = UserModel.objects.get(id=user_id)
+
+    user_is_student = get_user.groups.filter(name='student').exists()
+    user_is_instructor = get_user.groups.filter(name='instructor').exists()
+
+    if user_is_student:
+        appointement = Appointement.objects.filter(student=user_id, id=appointement_id).values()
+    elif user_is_instructor:
+        appointement = Appointement.objects.filter(instructor_id=user_id, id=appointement_id).values()
+
     if request.method == 'POST':
-
-        return JsonResponse({
-            'json_response': 'json_response'
-        })
-
+        if is_secratery or is_administrator:
+            appointement = Appointement.objects.filter(id=appointement_id).values()
+            appointement.delete()
+        elif user_is_instructor or user_is_student:
+            appointement.delete()
     else:
         redirect('/')
 

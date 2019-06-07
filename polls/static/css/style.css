@@ -69,6 +69,9 @@ input[type="submit"],input[type="reset"],a,.w3_agileits_services1_grid1{
 .header_left ul li a:hover{
 	color: #FF9800;
 }
+.d-none{
+    display: none;
+}
 /*-- social-icons --*/
 .agileinfo-social-grids{
     float: right;
@@ -2837,4 +2840,5 @@ nav.navbar.navbar-default {
     height: 250px;
     width:100%;
 }
+
 
