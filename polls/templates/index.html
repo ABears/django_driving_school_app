@@ -26,6 +26,7 @@
     <script type="text/javascript" src="{% static 'hello-week-master/dist/hello.week.min.js' %}"></script>
 
 </head>
+<body>
 <div class="header-bottom">
     <span class='user-token' data-user="{{user.id}}"></span>
     <nav class="navbar navbar-default">
@@ -55,7 +56,7 @@
                             <ul class="dropdown-menu agile_short_dropdown">
                                 <li><a href="/calendar">Calendar</a></li>
                                 <li><a href="/user">User</a></li>
-                                {% if user|has_group:'administrator' %}
+                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                     <li><a href="/admin-panel">Admin panel</a></li>
                                 {% endif %}
                             </ul>

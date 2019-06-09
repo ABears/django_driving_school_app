@@ -58,7 +58,7 @@ const calendar = new HelloWeek({
 
           last.innerHTML = '';
           var li = document.createElement('h2');
-          li.classList.add('.get-current-day');
+          li.classList.add('get-current-day');
           li.innerHTML += new Date(this.lastSelectedDay).getDate() + '/';
           li.innerHTML += Number(new Date(this.lastSelectedDay).getMonth()) + 1;
           li.innerHTML += '/' + new Date(this.lastSelectedDay).getFullYear();
@@ -184,8 +184,8 @@ const calendar = new HelloWeek({
 
     let appointement = last.firstChild.innerHTML + ' ' + getHour + ':00:00';
     let userId = document.querySelector('.user-token').getAttribute("data-user");
-    let studentId = document.querySelector('.student-selector').value;
-    let instructorId = document.querySelector('.instructor-selector').value;
+    let studentId = $('.student-selector').val();
+    let instructorId = $('.instructor-selector').val();
     let createAppointementUrl = '/create-appointement/'  + userId + '/' + studentId + '/' + instructorId;
     let data = { appointement, csrfmiddlewaretoken: token };
 
@@ -196,6 +196,10 @@ const calendar = new HelloWeek({
       success: function(response) {
         if(response.success){
           
+          let fullDate = $('.get-current-day').html()
+          console.log(fullDate);
+          getDayPlanning(fullDate.replaceAll('/', '-'))
+
           $('.' + getHour).addClass('d-none');
           $('.' + getHour).removeClass('alert-danger');
           $('.' + getHour).removeClass('alert-success');
@@ -208,10 +212,6 @@ const calendar = new HelloWeek({
           $('.r-' + getHour).parent().addClass('bg-danger');
           $('.r-' + getHour).next().html('<button class="img text-light h6 btn btn-circle btn-xl btn-danger delete-appointement" ><i class="fa fa-trash"></i></button>');
 
-          $('.delete-appointement').click(function(){
-            deleteAppointement($(this));
-          });
-
         }
         else if (response.error){
 
@@ -222,6 +222,9 @@ const calendar = new HelloWeek({
           $('.' + getHour).addClass('alert-danger');
           $('.' + getHour).text(response.error);
 
+          $('.delete-appointement').click(function(){
+            deleteAppointement($(this));
+          });
 
         }
       }
@@ -247,17 +250,48 @@ const calendar = new HelloWeek({
 
 function deleteAppointement(trigger){
   let appointementRow = trigger.parent().prev();
+  console.log(appointementRow);
   let getAppointemenId = appointementRow.attr('data-appointement-datetime');
 
   let getAppointementUrl = "/delete-appointement/"+ getSubjectUserId + '/' + getAppointemenId
-
+  
   $.ajax({
     type: "POST",
     url: getAppointementUrl,
     data: {csrfmiddlewaretoken: token},
-    success: function(response) {
-      console.log(response);
+    success: function(response) {;
+      
     }
+
+  })
+  .then(() => {
+
+    $.ajax({
+      type: "GET",
+      url: window.location.href,
+      success: function(response) {
+
+        let reloadedCalendar = $(response).find('.col-lg-9').html();
+        appointementRow.parent().removeClass('bg-danger')
+        appointementRow.parent().html(reloadedCalendar);
+        
+      }
+    })
+    .then(() => {
+
+      $('.add-appointement').click(function(){
+
+        let getRow  = this.parentNode.parentNode.previousElementSibling;
+        setAppointment(getRow);
+    
+        $('.alert').click(function(){
+          this.slideUp();
+        });
+    
+      });
+
+      
+    })
 
   })
 

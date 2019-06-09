@@ -1,0 +1,75 @@
+{% extends "../index.html" %}
+{% load staticfiles %}
+{% load auth_extras %}
+{% static "" as  BaseUrl %}
+{% block content %}
+
+    <span class="get-csrf-token">{% csrf_token %}</span>
+    <!-- User -->
+    <div class="team">
+        <div class="container">
+            <div class="team-main m">
+                <div class="w3l-heading">
+                    <h3 class="w3ls_head">All student's</h3>
+                </div>
+                <div class="team-bottom">
+                    <div class="col-md-3 team-grids mb-5 mt-5">
+                        <div class="add-container">
+                            <a href="/create-user">
+                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="team-bottom-info">
+                            <p>Ajouter un(e) étuditant(e)</p>
+                        </div>
+                        <!-- end normal -->
+                    </div>
+                    {% for student in students %}
+                    <div class="col-md-3 team-grids mb-5 mt-5">
+                        <!-- normal -->
+                        <div class="ih-item circle effect5">
+                            <div class="img"><img
+                                    src="http://fanfare-makabes.fr/wp-content/uploads/2015/09/user-image.jpg" alt="img"
+                                    class="img-responsive"></div>
+                            <div class="info">
+                                <div class="info-back">
+                                    <h3>{{ student.first_name }} {{ student.last_name }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-bottom-info">
+                            <p>{{student.email}}</p>
+                            <div class="w3l-social">
+                                <select class="form-control s-{{student.id}}">
+                                    <option>Select instructor</option>
+                                    {% for instructor in instructors %}
+                                        <option value="{{instructor.id}}">{{instructor.last_name}} {{instructor.first_name}}</option>
+                                    {% endfor %}
+                                </select>
+                                <ul>
+                                    <li>
+                                        <button class="img text-light h6 btn btn-circle btn-xl btn-success btn-attribute-user" data-button="{{student.id}}">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- end normal -->
+                    </div>
+                    {% endfor %}
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- User -->
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/attribute-user.js' %}"></script>
+{% endblock %}

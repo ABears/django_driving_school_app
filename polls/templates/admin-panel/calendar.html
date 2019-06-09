@@ -1,0 +1,39 @@
+{% extends "../index.html" %}
+{% load staticfiles %}
+{% static "" as  BaseUrl %}
+{% load auth_extras %}
+{% block content %}
+
+    <div class='get-csrf'>
+        {% csrf_token %}
+    </div>
+    <div class="col-md-12 team-grids mt-5 bg-light p-5" style="background-color: white;">
+        <div class="hello-week border-shadow p-5">
+            <div class="hello-week__header">
+                <div class="hello-week__label"></div>
+            </div>
+            <div class="hello-week__week"></div>
+            <div class="hello-week__month"></div>
+        </div>
+        <div class="col-md-12 team-grids mt-5 text-center">
+    
+            <h2><strong>Appointement</strong></h2>
+            <ul class="demo-last md-3 mt-3 mb-3"></ul>
+            <ul id="day-planning">
+
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+{% block footer %}
+    <script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
+    <script src="{% static 'js/easing.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script defer src="{% static 'js/jquery.flexslider.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block script %}
+        <script src="{% static 'js/general-calendar.js' %}"></script>
+    {% endblock %}
+{% endblock %}

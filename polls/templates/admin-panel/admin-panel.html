@@ -1,14 +1,41 @@
 {% extends "../index.html" %}
 {% load staticfiles %}
+{% load auth_extras %}
 {% static "" as  BaseUrl %}
 {% block content %}
 
-<body>
-
+    <!-- Add secreatry -->
+    {% if user|has_group:'secretary' %}
+    <div class="team">
+        <div class="container">
+            <div class="team-main">
+                <div class="w3l-heading">
+                    <h3 class="w3ls_head">Attribute student</h3>
+                </div>
+                <div class="team-bottom">
+                    <div class=" col-md-3 col-lg-3 col-sm-3 team-grids mb-5 mt-5">
+                        <div class="add-container">
+                            <a href="/non-attribute-student">
+                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="team-bottom-info">
+                            <p>Attribuer des étudiants</p>
+                        </div>
+                        <!-- end normal -->
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
     <!-- Instructor -->
     <div class="team">
         <div class="container">
-                {% if messages %}
+            {% if messages %}
                 <div class="alert alert-success text-center">
                     <ul class="messages text-center">
                         {% for message in messages %}
@@ -16,7 +43,7 @@
                         {% endfor %}
                     </ul>
                 </div>
-                {% endif %}
+            {% endif %}
             <div class="team-main">
                 <div class="w3l-heading">
                     <h3 class="w3ls_head">All instructor's</h3>
@@ -141,65 +168,67 @@
     <!-- User -->
 
     <!-- Secretary -->
-    <div class="team">
-        <div class="container">
-            <div class="team-main">
-                <div class="w3l-heading">
-                    <h3 class="w3ls_head">Secretery team</h3>
-                </div>
-                <div class="team-bottom">
-                    <div class="col-md-3 team-grids mb-5 mt-5">
-                        <div class="add-container">
-                            <a href="/create-secretary">
-                                <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </a>
-                        </div>
-                        <div class="team-bottom-info">
-                            <p>Ajouter un(e) secretaire</p>
-                        </div>
-                        <!-- end normal -->
+        {% if user|has_group:'administrator' %}
+        <div class="team">
+            <div class="container">
+                <div class="team-main">
+                    <div class="w3l-heading">
+                        <h3 class="w3ls_head">Secretery team</h3>
                     </div>
-                    {% for secretary in secretarys %}
-                    <div class="col-md-3 team-grids">
-                        <!-- normal -->
-                        <div class="ih-item circle effect5">
-                            <div class="img"><img src="http://fanfare-makabes.fr/wp-content/uploads/2015/09/user-image.jpg" alt="img"
-                                    class="img-responsive"></div>
-                            <div class="info">
-                                <div class="info-back">
-                                    <h3>{{ secretary.first_name }} {{ secretary.last_name }}</h3>
+                    <div class="team-bottom">
+                        <div class="col-md-3 team-grids mb-5 mt-5">
+                            <div class="add-container">
+                                <a href="/create-secretary">
+                                    <button class="img text-light h6 btn btn-circle btn-xxxl btn-warning">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="team-bottom-info">
+                                <p>Ajouter un(e) secretaire</p>
+                            </div>
+                            <!-- end normal -->
+                        </div>
+                        {% for secretary in secretarys %}
+                        <div class="col-md-3 team-grids">
+                            <!-- normal -->
+                            <div class="ih-item circle effect5">
+                                <div class="img"><img src="http://fanfare-makabes.fr/wp-content/uploads/2015/09/user-image.jpg" alt="img"
+                                        class="img-responsive"></div>
+                                <div class="info">
+                                    <div class="info-back">
+                                        <h3>{{ secretary.first_name }} {{ secretary.last_name }}</h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="team-bottom-info">
-                            <p>{{secretary.email}}</p>
-                            <div class="w3l-social">
-                                <ul>
-                                    <li><a href="/delete-secretary/{{secretary.id}}">
-                                            <button class="img text-light h6 btn btn-circle btn-xl btn-danger"><i
-                                                    class="fa fa-close"></i></button>
-                                        </a></li>
-                                    <li><a href="/update-secretary/{{secretary.id}}">
-                                            <button class="img text-light h6 btn btn-circle btn-xl btn-primary"><i
-                                                    class="fa fa-pencil"></i></button>
-                                        </a></li>
-                                    <li><a href="/read-secretary/{{secretary.id}}">
-                                            <button class="img text-light h6 btn btn-circle btn-xl btn-dark"><i class="fa fa-eye"></i></button>
-                                        </a></li>
-                                </ul>
+                            <div class="team-bottom-info">
+                                <p>{{secretary.email}}</p>
+                                <div class="w3l-social">
+                                    <ul>
+                                        <li><a href="/delete-secretary/{{secretary.id}}">
+                                                <button class="img text-light h6 btn btn-circle btn-xl btn-danger"><i
+                                                        class="fa fa-close"></i></button>
+                                            </a></li>
+                                        <li><a href="/update-secretary/{{secretary.id}}">
+                                                <button class="img text-light h6 btn btn-circle btn-xl btn-primary"><i
+                                                        class="fa fa-pencil"></i></button>
+                                            </a></li>
+                                        <li><a href="/read-secretary/{{secretary.id}}">
+                                                <button class="img text-light h6 btn btn-circle btn-xl btn-dark"><i class="fa fa-eye"></i></button>
+                                            </a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- end normal -->
+                            <!-- end normal -->
+                        </div>
+                        {% endfor %}
+                        <div class="clearfix"> </div>
                     </div>
-                    {% endfor %}
-                    <div class="clearfix"> </div>
                 </div>
             </div>
+            {% endif %}
         </div>
-    </div>
     <!-- Secretary -->
 
 
