@@ -36,6 +36,7 @@ def create_appointement(request, id, student_id, instructor_id):
         if len(appointement_exist) == 0:
             
             student.forfait_hour -= 1
+            student.taken_hour += 1
             student.save()
             
             appointement = Appointement.objects.create(
@@ -144,8 +145,9 @@ def delete_appointement(request, user_id, appointement_id):
         
         student = UserModel.objects.get(id=appointement.student_id)
         student.forfait_hour += 1
+        student.taken_hour -= 1
         student.save()
-        
+
     else:
         redirect('/')
 

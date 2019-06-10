@@ -100,9 +100,21 @@ def read_student(request, id):
 
     is_secratery = request.user.groups.filter(name='secretary').exists()
     is_administrator  = request.user.groups.filter(name='administrator').exists()
+    is_student = request.user.groups.filter(name='student').exists()
+
     get_instructors = UserModel.objects.filter(groups__name="instructor", is_active=True)
     get_students = UserModel.objects.filter(groups__name="student", is_active=True)
     student_instructor = ''
+
+    if is_student: 
+        try:    
+            get_user = UserModel.objects.get(id=id)
+            if get_user.id != request.user.id:
+                return redirect('/')
+            else:
+                is_owner = True
+        except:
+            return redirect('/')
 
     for instructor in get_instructors:
         get_student = instructor.get_students.filter(id=id)
@@ -110,7 +122,7 @@ def read_student(request, id):
             student_instructor = instructor
 
 
-    if is_administrator or is_secratery:
+    if is_administrator or is_secratery or is_owner:
         try:    
             get_user = UserModel.objects.get(id=id)
         except:

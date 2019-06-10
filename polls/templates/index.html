@@ -55,7 +55,11 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span data-hover="Account">Account</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu agile_short_dropdown">
                                 <li><a href="/calendar">Calendar</a></li>
-                                <li><a href="/user">User</a></li>
+
+                                {% if user|has_group:'student' %}
+                                    <li><a href="/read-student/{{user.id}}">User</a></li>
+                                {% endif %}
+
                                 {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                     <li><a href="/admin-panel">Admin panel</a></li>
                                 {% endif %}
@@ -63,7 +67,7 @@
                         </li>
                         <li><a href="/logout"><span data-hover="Logout">Logout</span></a></li>
                     {% else %}
-                        <li><a href="/#form-register"><span data-hover="Register">Register</span></a></li>                        
+                        <li><a href="/#form-register"><span data-hover="Register">Register</span></a></li>                       
                         <li><a href="/login"><span data-hover="login">login</span></a></li>
                     {% endif %}
                 </ul>

@@ -36,7 +36,8 @@
                             <div class="team-bottom-info">
                                 <p>{{subject_user.email}}</p>
                                 {% if subject_user|has_group:'student' %}
-                                <p class="font-weight-bold"> Package: {{subject_user.forfait_hour }} hour</p>
+                                    <p class="font-weight-bold"> Package: {{subject_user.forfait_hour }} hour</p>
+                                    <p class="font-weight-bold"> Lesson time : {{subject_user.taken_hour }} hour</p>
                                 {% endif %}
                             </div>
                         <!-- end normal -->
@@ -74,17 +75,14 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-8">
                                             
                                             <select class="form-control instructor-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     <!-- if subject user is admin set only option subject user -->
                                                     {% if subject_user|has_group:'instructor' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}                                                                   
                                                         <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                             <select class="form-control student-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     {% if subject_user|has_group:'student' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}
@@ -93,7 +91,6 @@
                                                             <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
                                                         {% endfor %}
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-lg-3">
@@ -118,17 +115,14 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-9">
 
                                             <select class="form-control instructor-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     <!-- if subject user is admin set only option subject user -->
                                                     {% if subject_user|has_group:'instructor' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}                                                                   
                                                         <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                             <select class="form-control student-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     {% if subject_user|has_group:'student' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}
@@ -137,7 +131,6 @@
                                                             <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
                                                         {% endfor %}
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-lg-3">
@@ -162,17 +155,14 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-10">
 
                                             <select class="form-control instructor-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     <!-- if subject user is admin set only option subject user -->
                                                     {% if subject_user|has_group:'instructor' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}                                                                   
                                                         <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                             <select class="form-control student-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     {% if subject_user|has_group:'student' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}
@@ -181,7 +171,6 @@
                                                             <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
                                                         {% endfor %}
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-lg-3">
@@ -206,17 +195,14 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-11">
 
                                             <select class="form-control instructor-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     <!-- if subject user is admin set only option subject user -->
                                                     {% if subject_user|has_group:'instructor' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}                                                                   
                                                         <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                             <select class="form-control student-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     {% if subject_user|has_group:'student' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}
@@ -225,7 +211,6 @@
                                                             <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
                                                         {% endfor %}
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-lg-3">
@@ -250,17 +235,14 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-12">
 
                                             <select class="form-control instructor-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     <!-- if subject user is admin set only option subject user -->
                                                     {% if subject_user|has_group:'instructor' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}                                                                   
                                                         <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                             <select class="form-control student-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     {% if subject_user|has_group:'student' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}
@@ -269,7 +251,6 @@
                                                             <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
                                                         {% endfor %}
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-lg-3">
@@ -294,17 +275,14 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-13">
 
                                             <select class="form-control instructor-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     <!-- if subject user is admin set only option subject user -->
                                                     {% if subject_user|has_group:'instructor' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}                                                                   
                                                         <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                             <select class="form-control student-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     {% if subject_user|has_group:'student' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}
@@ -313,7 +291,6 @@
                                                             <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
                                                         {% endfor %}
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-lg-3">
@@ -338,17 +315,14 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-14">
 
                                             <select class="form-control instructor-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     <!-- if subject user is admin set only option subject user -->
                                                     {% if subject_user|has_group:'instructor' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}                                                                   
                                                         <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                             <select class="form-control student-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     {% if subject_user|has_group:'student' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}
@@ -357,7 +331,6 @@
                                                             <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
                                                         {% endfor %}
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-lg-3">
@@ -382,17 +355,14 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-15">
 
                                             <select class="form-control instructor-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     <!-- if subject user is admin set only option subject user -->
                                                     {% if subject_user|has_group:'instructor' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}                                                                   
                                                         <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                             <select class="form-control student-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     {% if subject_user|has_group:'student' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}
@@ -401,7 +371,6 @@
                                                             <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
                                                         {% endfor %}
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-lg-3">
@@ -426,17 +395,14 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-16">
 
                                             <select class="form-control instructor-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     <!-- if subject user is admin set only option subject user -->
                                                     {% if subject_user|has_group:'instructor' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}                                                                   
                                                         <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                             <select class="form-control student-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     {% if subject_user|has_group:'student' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}
@@ -445,7 +411,6 @@
                                                             <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
                                                         {% endfor %}
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-lg-3">
@@ -470,17 +435,14 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-17">
 
                                             <select class="form-control instructor-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     <!-- if subject user is admin set only option subject user -->
                                                     {% if subject_user|has_group:'instructor' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}                                                                   
                                                         <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                             <select class="form-control student-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     {% if subject_user|has_group:'student' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}
@@ -489,7 +451,6 @@
                                                             <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
                                                         {% endfor %}
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-lg-3">
@@ -514,17 +475,14 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-18">
 
                                             <select class="form-control instructor-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     <!-- if subject user is admin set only option subject user -->
                                                     {% if subject_user|has_group:'instructor' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}                                                                   
                                                         <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                             <select class="form-control student-selector" id="sel1">
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
                                                     {% if subject_user|has_group:'student' %}
                                                         <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
                                                     {% else %}
@@ -533,7 +491,6 @@
                                                             <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
                                                         {% endfor %}
                                                     {% endif %}
-                                                {% endif %}
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-lg-3">
