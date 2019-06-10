@@ -5,7 +5,7 @@
 {% block content %}
 
     <!-- Add secreatry -->
-    {% if user|has_group:'secretary' %}
+    {% if user|has_group:'secretary' or  user|has_group:'administrator'  %}
     <div class="team">
         <div class="container">
             <div class="team-main">

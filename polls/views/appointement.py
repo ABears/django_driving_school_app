@@ -27,8 +27,17 @@ def create_appointement(request, id, student_id, instructor_id):
 
         appointement_exist = Appointement.objects.filter(appointement_date=format_appointement, instructor_id=instructor_id).all()
 
+        if student.forfait_hour <= 0:
+
+            return JsonResponse({
+                'error': "This forfait as been reached his limit"
+            })
+
         if len(appointement_exist) == 0:
-                        
+            
+            student.forfait_hour -= 1
+            student.save()
+            
             appointement = Appointement.objects.create(
                         appointement_date = format_appointement,
                         student = student,
@@ -132,7 +141,11 @@ def delete_appointement(request, user_id, appointement_id):
             appointement.delete()
         elif user_is_instructor or user_is_student:
             appointement.delete()
-
+        
+        student = UserModel.objects.get(id=appointement.student_id)
+        student.forfait_hour += 1
+        student.save()
+        
     else:
         redirect('/')
 

@@ -13,7 +13,7 @@ class UserModel(AbstractUser):
     email = models.EmailField(max_length=500, default=None)
     password = models.CharField(max_length=500, default=None)
     is_active = models.BooleanField(default=True)
-    forfait_hour = models.IntegerField(default=None)
+    forfait_hour = models.IntegerField(default=20, blank=False)
     images = models.CharField(max_length=500, default=None)
     get_students = models.ManyToManyField("self", blank=True)
 

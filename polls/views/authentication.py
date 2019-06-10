@@ -35,7 +35,7 @@ def index(request):
                                     email = data.get('email'),
                                     first_name = data.get('first_name'),
                                     last_name = data.get('last_name'),
-                                    forfait_hour = 0,
+                                    forfait_hour = 20,
                                     images= "default.jpg"
                                 )
             student_group = Group.objects.get(name='student')

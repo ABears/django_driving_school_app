@@ -24,6 +24,10 @@ class RegisterForm(ModelForm):
 
 # Create the form class.
 class UpdateForm(ModelForm):
+    def __init__(self, *args,**kwargs):
+        self.get_user = kwargs.pop("get_user")
+        super(UpdateForm, self).__init__(*args,**kwargs)
+
     class Meta:
         model = UserModel
         fields = ['email' , 'first_name', 'last_name']
@@ -33,7 +37,7 @@ class UpdateForm(ModelForm):
         email = cleaned_data['email']
 
         try:
-            if email and UserModel.objects.get(email=email):
+            if email and UserModel.objects.get(email=email) and self.get_user.email != email:
                 raise ValidationError("Look like user all ready use this email")
         except UserModel.DoesNotExist:
             print('')

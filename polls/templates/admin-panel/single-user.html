@@ -35,22 +35,9 @@
                             </div>
                             <div class="team-bottom-info">
                                 <p>{{subject_user.email}}</p>
-                                <div class="w3l-social">
-                                    <ul>
-                                        <li>
-                                            <a href="/delete-instructor/{{instructor.id}}">
-                                                <button class="img text-light h6 btn btn-circle btn-xl btn-danger"><i
-                                                        class="fa fa-close"></i></button>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/update-instructor/{{instructor.id}}">
-                                                <button class="img text-light h6 btn btn-circle btn-xl btn-primary"><i
-                                                        class="fa fa-pencil"></i></button>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                {% if subject_user|has_group:'student' %}
+                                <p class="font-weight-bold"> Package: {{subject_user.forfait_hour }} hour</p>
+                                {% endif %}
                             </div>
                         <!-- end normal -->
                     </div>
@@ -520,10 +507,10 @@
                                             {% endfor %}
                                         </ul>
                                     </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right">
+                                    <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-bottom border-left p-5 border-right">
                                         <span class="get-hour">18</span>H                                                                                                                                                        
                                     </div>
-                                    <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top p-4 border-right">
+                                    <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-bottom p-4 border-right">
                                         <div class="col-md-8 col-sm-8 col-lg-8 r-18">
 
                                             <select class="form-control instructor-selector" id="sel1">
@@ -555,45 +542,6 @@
                                     </div>
                                 </div>
 
-                                <!--  19 Heure -->                                                                                           
-                                <div class="row">
-                                    <div class="alert text-center mt-3 d-none 19">
-                                        <ul class="messages text-center">
-                                            {% for message in messages %}
-                                            <span {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</span>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 col-3 border-top border-left p-5 border-right border-bottom">
-                                        <span class="get-hour">19</span>H                       
-                                    </div>
-                                    <div class="col-sm-9 col-md-9 col-lg-9 col-9 border-top border-right p-4 border-bottom">
-                                        <div class="col-md-8 col-sm-8 col-lg-8 r-19">
-                                            <select class="form-control" id="sel1">
-                                                <option>Instructor</option>
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
-                                                    <!-- if subject user is admin set only option subject user -->
-                                                    {% if subject_user|has_group:'instructor' %}
-                                                        <option value="{{subject_user.id}}">{{subject_user.first_name}} {{subject_user.last_name}}</option>                                                              
-                                                    {% else %}                                                                   
-                                                        <option value="{{instructors.id}}">{{instructors.first_name}} {{instructors.last_name}}</option>
-                                                    {% endif %}
-                                                {% endif %}
-                                            </select>
-                                            <select class="form-control" id="sel1">
-                                                <option>Student</option>
-                                                {% if user|has_group:'administrator' or user|has_group:'secretary' %}
-                                                    {% for student in students %}
-                                                        <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3 col-sm-3 col-lg-3">
-                                            <button class="img text-light h6 btn btn-circle btn-xl btn-success add-appointement" ><i class="fa fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="clearfix"> </div>

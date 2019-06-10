@@ -76,7 +76,7 @@ def create_user(request):
                                         email = data.get('email'),
                                         first_name = data.get('first_name'),
                                         last_name = data.get('last_name'),
-                                        forfait_hour = 0,
+                                        forfait_hour = 20,
                                         images= "default.jpg"
                                     )
                 student_group = Group.objects.get(name='student')
@@ -130,7 +130,7 @@ def read_student(request, id):
 def update_student(request, id):
 
     is_administrator  = request.user.groups.filter(name='administrator').exists()
-    is_secratery  = request.user.groups.filter(name='administrator').exists()
+    is_secratery  = request.user.groups.filter(name='secretary').exists()
     update_form = None
     
     try:
@@ -140,19 +140,20 @@ def update_student(request, id):
         return redirect('/admin-panel')
 
     if is_administrator or is_secratery:
-
+        get_user = UserModel.objects.get(id=id)
         if request.POST:
-            update_form = UpdateForm(request.POST)
+            update_form = UpdateForm(request.POST, get_user=get_user)
             # Registration form
+            
             if update_form.is_valid():
                 data = request.POST.copy()    
                 get_user.first_name = data.get('first_name')
                 get_user.last_name = data.get('last_name')
                 get_user.email = data.get('email') 
+                get_user.forfait_hour = data.get('forfait_hour') 
                 get_user.save()
                 messages.success(request, 'This user as been successfully updated')
                 return redirect('/admin-panel')
-                             
     else:
         redirect('/')
 
@@ -264,7 +265,7 @@ def update_instructor(request, id):
     if is_administrator or is_secratery:
 
         if request.POST:
-            update_form = UpdateForm(request.POST)
+            update_form = UpdateForm(request.POST, get_user=get_user)
             # Registration form
             if update_form.is_valid():
                 data = request.POST.copy()    
@@ -378,7 +379,8 @@ def update_secretary(request, id):
     if is_administrator:
 
         if request.POST:
-            update_form = RegisterForm(request.POST)
+            update_form = UpdateForm(request.POST, get_user=get_user)
+            
             # Registration form
             if update_form.is_valid():
                 data = request.POST.copy()    

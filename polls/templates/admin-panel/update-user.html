@@ -1,6 +1,7 @@
 {% extends "../index.html" %}
 {% load staticfiles %}
 {% static "" as  BaseUrl %}
+{% load auth_extras %}
 {% block content %}
 <body>
     <!-- register -->
@@ -19,11 +20,14 @@
         {% endif %}
         <div class="container">
             <div class="col-md-6 w3layouts_register_right">
-                <form action="#" method="post" id="form-register">
+                <form action="" method="post" id="form-register">
                     {% csrf_token %}
                     <input name="first_name" placeholder="First Name" type="text" style="margin-bottom: 1rem" value="{{subject_user.first_name}}" required="">
                     <input name="last_name" placeholder="Last Name" type="text" value="{{subject_user.last_name}}" required="">
                     <input name="email" placeholder="Email" type="email" value="{{subject_user.email}}" required="">
+                    {% if subject_user|has_group:'student' %}
+                        <input name="forfait_hour" placeholder="Forfait" type="text" value="{{subject_user.forfait_hour}}" required="">
+                    {% endif %}
                     <input type="submit" value="Register">
                 </form>
             </div>
