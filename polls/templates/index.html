@@ -54,13 +54,19 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span data-hover="Account">Account</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu agile_short_dropdown">
-                                <li><a href="/calendar">Calendar</a></li>
 
                                 {% if user|has_group:'student' %}
+
                                     <li><a href="/read-student/{{user.id}}">User</a></li>
+
+                                {% elif user|has_group:'instructor' %}
+
+                                    <li><a href="/read-instructor/{{user.id}}">User</a></li>
+
                                 {% endif %}
 
                                 {% if user|has_group:'administrator' or user|has_group:'secretary' %}
+                                    <li><a href="/calendar">Calendar</a></li>
                                     <li><a href="/admin-panel">Admin panel</a></li>
                                 {% endif %}
                             </ul>

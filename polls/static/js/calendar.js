@@ -44,9 +44,12 @@ const calendar = new HelloWeek({
     return this.split(target).join(replacement);
   };
 
+  $('#day-planning').hide()
+
   function updateInfo() {
 
-      
+      $('#day-planning').show()
+
       if (this.today) {
           today.innerHTML = '';
           var li = document.createElement('li');
@@ -89,6 +92,9 @@ const calendar = new HelloWeek({
       }
     })
     .then(() => {
+      
+      let getUserBaseUrl = '/read-user/';
+
       $.ajax({
         type: "POST",
         url: getDayPlanningUrl,
@@ -98,19 +104,44 @@ const calendar = new HelloWeek({
           const allAppointement = response.all_appointement;
   
           for (let key in allAppointement){
-  
-            let appointement = allAppointement[key];
-            let getHour = new Date(appointement.appointement_date).getUTCHours();
             
-            $('.r-' + getHour).attr('data-appointement-datetime', appointement.id);
-            $('.r-' + getHour).html('');
-  
-            $('.r-' + getHour).parent().addClass('bg-danger');
-            $('.r-' + getHour).next().html('<button class="img text-light h6 btn btn-circle btn-xl btn-danger delete-appointement" ><i class="fa fa-trash"></i></button>'); 
+            let appointement = allAppointement[key];
 
-            $('.delete-appointement').click(function(){
-              deleteAppointement($(this));
-            });
+            $.ajax({
+              type: "POST",
+              url: getUserBaseUrl + appointement.instructor_id,
+              data: data,
+              success: function(response) {
+                
+                getInstructor = response.subject_user[0].last_name + ' ' + response.subject_user[0].first_name;
+                
+              }
+            })
+            .then(() => {
+              $.ajax({
+                type: "POST",
+                url: getUserBaseUrl + appointement.student_id,
+                data: data,
+                success: function(response) {
+  
+                  getStudent = response.subject_user[0].last_name + ' ' +response.subject_user[0].first_name;
+  
+                }
+              }).then(() => {
+                  let getHour = new Date(appointement.appointement_date).getUTCHours();
+              
+                  $('.r-' + getHour).attr('data-appointement-datetime', appointement.id);
+                  $('.r-' + getHour).html('');
+        
+                  $('.r-' + getHour).parent().addClass('bg-danger');
+                  $('.r-' + getHour).html('<div class="p-5 text-center">' + getInstructor + ' / ' + getStudent + '</div>');
+                  $('.r-' + getHour).next().html('<button class="img text-light h6 btn btn-circle btn-xl btn-danger delete-appointement" ><i class="fa fa-trash"></i></button>'); 
+      
+                  $('.delete-appointement').click(function(){
+                    deleteAppointement($(this));
+                  });
+              })
+            })
           }
   
         }

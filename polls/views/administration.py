@@ -37,6 +37,13 @@ def admin_panel(request):
     return render(request, 'admin-panel/admin-panel.html', context)
 
 def read_driving_school_planning(request):
+    
+    is_secratery = request.user.groups.filter(name='secretary').exists()
+    is_administrator  = request.user.groups.filter(name='administrator').exists()
+
+    if is_administrator == False and is_secratery == False:
+        return redirect('/')
+
     return render(request, 'admin-panel/calendar.html')
 
 def read_all_planning(request):
@@ -105,6 +112,7 @@ def read_student(request, id):
     get_instructors = UserModel.objects.filter(groups__name="instructor", is_active=True)
     get_students = UserModel.objects.filter(groups__name="student", is_active=True)
     student_instructor = ''
+    is_owner = False
 
     if is_student: 
         try:    
@@ -242,9 +250,19 @@ def read_instructor(request, id):
 
     is_secratery = request.user.groups.filter(name='secretary').exists()
     is_administrator  = request.user.groups.filter(name='administrator').exists()
-    get_instructors = UserModel.objects.filter(groups__name="instructor", is_active=True)
-
-    if is_administrator or is_secratery:
+    is_instructor  = request.user.groups.filter(name='instructor').exists()
+    is_owner = False
+    if is_instructor: 
+        try:    
+            get_user = UserModel.objects.get(id=id)
+            if get_user.id != request.user.id:
+                return redirect('/')
+            else:
+                is_owner = True
+        except:
+            return redirect('/')
+            
+    if is_administrator or is_secratery or is_owner:
         try:    
             get_user = UserModel.objects.get(id=id)
             get_students = get_user.get_students.all()
@@ -256,7 +274,7 @@ def read_instructor(request, id):
     context = {
         'subject_user': get_user,
         'students': get_students,
-        'instructors': get_instructors
+        'is_owner': is_owner
     }
     
     return render(request, 'admin-panel/single-user.html', context)  
@@ -442,9 +460,6 @@ def attribute_student(request, instructor_id, student_id):
     
     get_instructor = UserModel.objects.get(id=instructor_id)
     get_student = UserModel.objects.get(id=student_id)
-
-    # instructor_is_instructor = get_instructor.groups.filter(groups__name='instructor').exists()
-    # student_is_student = get_student.groups.filter(groups__name='student').exists()
 
     get_instructor_group = Group.objects.get(user = get_instructor)
     get_student_group = Group.objects.get(user = get_student)

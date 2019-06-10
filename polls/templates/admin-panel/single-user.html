@@ -38,6 +38,7 @@
                                 {% if subject_user|has_group:'student' %}
                                     <p class="font-weight-bold"> Package: {{subject_user.forfait_hour }} hour</p>
                                     <p class="font-weight-bold"> Lesson time : {{subject_user.taken_hour }} hour</p>
+                                    <p class="font-weight-bold"> Instructeur: {{instructors.first_name}} {{instructors.last_name}} </p>
                                 {% endif %}
                             </div>
                         <!-- end normal -->
@@ -509,5 +510,45 @@
         </div>
     </div>
 
+    {% if subject_user|has_group:'instructor' and is_owner %}
+
+        <!-- User -->
+        <div class="team">
+            <div class="container">
+                <div class="team-main m">
+                    <div class="w3l-heading">
+                        <h3 class="w3ls_head">My classroom</h3>
+                    </div>
+                    <div class="team-bottom">
+                        {% for student in students %}
+                        <div class="col-md-3 team-grids mb-5 mt-5">
+                            <!-- normal -->
+                            <div class="ih-item circle effect5">
+                                <div class="img"><img
+                                        src="http://fanfare-makabes.fr/wp-content/uploads/2015/09/user-image.jpg" alt="img"
+                                        class="img-responsive"></div>
+                                <div class="info">
+                                    <div class="info-back">
+                                        <h3>{{ student.first_name }} {{ student.last_name }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="team-bottom-info">
+                                <p>{{student.email}}</p>
+                                <p class="font-weight-bold"> Package: {{student.forfait_hour }} hour</p>
+                                <p class="font-weight-bold"> Lesson time : {{student.taken_hour }} hour</p>
+                            </div>
+    
+                            <!-- end normal -->
+                        </div>
+                        {% endfor %}
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- User -->
+
+    {% endif %}
 
 {% endblock %}
