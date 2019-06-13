@@ -57,8 +57,12 @@ def connection(request):
         if login_form.is_valid():
 
             data = request.POST.copy()
-            user = UserModel.objects.get(email=data.get('email'))
-            is_check_password = user.check_password(data.get('password'))
+            
+            try:
+                user = UserModel.objects.get(email=data.get('email'), is_active=True)
+                is_check_password = user.check_password(data.get('password'))
+            except:
+                return redirect('/login')
 
             if user and is_check_password:
                 login(request, user)

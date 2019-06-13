@@ -14,7 +14,7 @@ class RegisterForm(ModelForm):
         email = cleaned_data['email']
 
         try:
-            if email and UserModel.objects.get(email=email):
+            if email and UserModel.objects.get(email=email, is_active=True):
                 raise ValidationError("Look like user all ready use this email")
         except UserModel.DoesNotExist:
             print('')
@@ -37,7 +37,7 @@ class UpdateForm(ModelForm):
         email = cleaned_data['email']
 
         try:
-            if email and UserModel.objects.get(email=email) and self.get_user.email != email:
+            if email and UserModel.objects.get(email=email, is_active=True) and self.get_user.email != email:
                 raise ValidationError("Look like user all ready use this email")
         except UserModel.DoesNotExist:
             print('')
@@ -63,7 +63,7 @@ class LoginForm(ModelForm):
         get_password = cleaned_data['password']
 
         try:
-            user = UserModel.objects.get(email=get_email)
+            user = UserModel.objects.get(email=get_email, is_active=True)
             user.check_password(get_password)
         except UserModel.DoesNotExist:
             raise ValidationError("It's look like your account it's not recognized")

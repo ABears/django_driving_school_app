@@ -265,7 +265,7 @@ def read_instructor(request, id):
     if is_administrator or is_secratery or is_owner:
         try:    
             get_user = UserModel.objects.get(id=id)
-            get_students = get_user.get_students.all()
+            get_students = get_user.get_students.filter(is_active=True).all()
         except:
             messages.success(request, 'User not found')      
     else:
